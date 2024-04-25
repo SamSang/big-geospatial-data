@@ -95,11 +95,11 @@ The analysis will bring together building footprint vector data and tree canopy 
     |Year|Start Date|End Date|
     |-|-|-|
     |2017|2017-01-01|2018-01-01|
-    |2024|2022-01-01|2024-01-01|
+    |2024|2022-01-01|2022-06-01|
 
     The red and near-infrared bands yield a computed ndvi, which is compared to a threshold to detemine if that that tile is (value `1`) or is not (value `0`) in the tree canopy. The difference of those two layers shows the change in the tree canopy over time.
 
-    See work in `canopyDiff.js` or access the code on [Google Earth Engine](https://code.earthengine.google.com/36b83b5ff7fb09bc090db04f46f91986).
+    See work in `canopyDiff.js` or access the code on [Google Earth Engine](https://code.earthengine.google.com/2dd090f09e293eef7aa20561e35c06e4).
 
 
 5. Merge tree canopy and building footprint
@@ -115,7 +115,7 @@ The analysis will bring together building footprint vector data and tree canopy 
 
     First, convert the shapefile to mbtiles.
 
-    Locally, convert the shapefile to geojson.
+    Locally, convert the shapefile to geojson. Upload that file to a configured AWS instance.
 
     ```shell
     ogr2ogr -f GeoJSON -t_srs crs:84 buildings_canopy/buildings_canopy.geojson buildings_canopy/buildings_canopy.shp;
@@ -141,13 +141,15 @@ The analysis will bring together building footprint vector data and tree canopy 
 
 ## Results
 
-Unsurpisingly, the visualization shows that buildings tend to displace trees. New development in built-up areas, like Point Breeze, do not displace the tree canopy. New buildings in areas not as compact and developed are displacing the tree canopy.
+Unsurpisingly, the visualization shows that adding large buildings reduces the tree canopy coverage. Smaller buildings tend to have less to no effect on the canopy.
 
-In general, almost all buildings have no impact on the canopy. More buildings have a small negative effect on the canopy.
+Still, most buildings are having a small impact on the tree canopy.
 
 ![Distribution of tree canopy delta frequency](histogram.png)
 
-There are two outliers along Fox St by the Roosevelt Expressway. Those buildings look like they've added trees. From Google Street View, these parcels appear to be run-of-the-mill warehouses. This could be an artifact of how the ndiv is computed, a building boundary that is drawn slightly off, or a relic of how the canopy was computed for the previous use.
+Counterintuitively, many buildings are associated with an increase in tree canopy. This could be due to a number of factors. First, buildings added since mid-2022 could be displaying tree canopy changes that happened before construction started. Second, the underlying data could have been collected under different weather conditions.
+
+Overall, this visualization is useful to put in perspective the isolated effects of new development on the tree canopy.
 
 
 ## Extensions
@@ -165,8 +167,8 @@ GDAL_Translate -of GTIFF -ot BYTE CanopyDiff.tif CanopyDiff8bit.tif
 
 ## Conclusion
 
-Analysis of geospatial data often confirms our suspicions. In concluding that buildings tend to displace the tree canopy, this analysis is no different. Nonetheless, this analysis could help test our assumptions about development.
+Analysis of geospatial data often confirms our suspicions. This analysis tests our assumptions about the consequences of development.
 
-Much infill development, like in Point Breeze, Kensington and Pennsport, does not affect the canopy. We see more buildings tagged with zero than someone opposed to a new development might expect. Neighborhoods can be stronger knowing the effect development tends to have on their canopy, one way or the other.
+We see more buildings tagged with zero than someone opposed to a new development might expect. Larger buildings, perhaps built on parcels vacant long enough, or large enough to have grown trees, are more likely to have negative effects on the tree canopy. Neighborhoods can be stronger knowing the effect development tends to have on their canopy, one way or the other.
 
 City regulators might use this data to identify development that has violated their agreements by removing tree canopy. Developers might cut corners, or trees, on the ground, but we can identify their actions on a map.

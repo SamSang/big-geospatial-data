@@ -15,7 +15,7 @@ var naip2017 = ee.ImageCollection('USDA/NAIP/DOQQ')
 // get the canopy in 2023 (as a proxy for 2024)
 var naip2023 = ee.ImageCollection('USDA/NAIP/DOQQ')
 .filterBounds(ee.Geometry.Rectangle(bound_lon1, bound_lat1, bound_lon2, bound_lat2))
-.filterDate('2022-01-01', '2024-01-01');
+.filterDate('2022-01-01', '2022-06-01');
 
 // get ndiv for 2017
 var mosaic2017 = naip2017.mosaic();
