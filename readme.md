@@ -7,9 +7,11 @@ View [the finished visualization](https://api.mapbox.com/styles/v1/akalenie/clv5
 
 ## Presentation talking points
 
-- Visualization
-    - irregularities in the tree canopy data
 - Data sources we're familliar with: trees and buildings
+    - Building footprints: Use database to find added buildings
+    - Canopy: google earth engine
+    - Intersection: jupyter notebook
+    - Visualization: mapbox
 - Compute the value:
     - sum
     - average (size is already visualized)
@@ -17,8 +19,10 @@ View [the finished visualization](https://api.mapbox.com/styles/v1/akalenie/clv5
 - Disribution
 
 ![](histogram.png)
-- Outliers
-    - Warehouses, potentially an artifact or a bug in the code
+
+- Trends
+    - Mostly net positive
+    - Granularity of the raster could be an issue
 
 
 ## Introduction
@@ -136,7 +140,7 @@ The analysis will bring together building footprint vector data and tree canopy 
 
     Now we have a file that's ready to upload to [mapbox](https://studio.mapbox.com/).
 
-    I have used that file to create [a visualization](https://api.mapbox.com/styles/v1/akalenie/clv5gkhdp02js01p6hdl9fcwp.html?title=view&access_token=pk.eyJ1IjoiYWthbGVuaWUiLCJhIjoiY2x2MnRmdHJ4MGV5aDJybGppNHowbHp4biJ9.ezC4CyFggkavaC_HZBGdig&zoomwheel=true&fresh=true#13.53/39.95025/-75.20096) showing buildings that removed canopy in red, buildings that removed no canopy in blue, and buildings that added canopy in green.
+    I have used that file to create [a visualization](https://api.mapbox.com/styles/v1/akalenie/clv5gkhdp02js01p6hdl9fcwp.html?title=view&access_token=pk.eyJ1IjoiYWthbGVuaWUiLCJhIjoiY2x2MnRmdHJ4MGV5aDJybGppNHowbHp4biJ9.ezC4CyFggkavaC_HZBGdig&zoomwheel=true&fresh=true#13.53/39.95025/-75.20096) showing buildings that removed canopy in red, buildings that removed no canopy in yellow, and buildings that added canopy in blue.
 
 
 ## Results
